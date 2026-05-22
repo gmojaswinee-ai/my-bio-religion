@@ -27,14 +27,10 @@ seen = [0] * len(dna)
 prophecy_log = []
 
 def mutate_base(base):
-    if base == 'A':
-        return 'T'
-    elif base == 'T':
-        return 'C'
-    elif base == 'C':
-        return 'G'
-    else:
-        return 'A'
+    if base == 'A': return 'T'
+    elif base == 'T': return 'C'
+    elif base == 'C': return 'G'
+    else: return 'A'
 
 def generate_prophecy(pos, old, new, count):
     prophecies = [
@@ -45,6 +41,21 @@ def generate_prophecy(pos, old, new, count):
     ]
     return random.choice(prophecies)
 
+def visual_genome():
+    symbols = {'A': '🌱', 'T': '⚰️', 'C': '🜂', 'G': '🌀'}
+    print("\n" + "=" * 60)
+    print("VISUAL GENOME MAP")
+    print("=" * 60)
+    for i, base in enumerate(dna):
+        symbol = symbols.get(base, '?')
+        mark = "👁️" if seen[i] >= 3 else "·"
+        print(f"{symbol}{mark} ", end="")
+        if (i + 1) % 20 == 0:
+            print()
+    print("\n" + "=" * 60)
+    print("🌱=A  ⚰️=T  🜂=C  🌀=G  👁️=Witnessed 3+ times  ·=Unseen")
+    print("=" * 60)
+
 print("\n" + "=" * 60)
 print(f"Genome ready: {len(dna)} bases")
 print("Mutation rule: Every 3rd witness triggers a mutation (A->T->C->G->A)")
@@ -52,6 +63,7 @@ print("=" * 60)
 print("\nCOMMANDS:")
 print("  view <start> <end>   -> Witness positions")
 print("  entire               -> Show full genome")
+print("  visual               -> Show visual genome map")
 print("  stats                -> Show statistics")
 print("  prophecies           -> Show prophecies")
 print("  quit                 -> Exit")
@@ -72,6 +84,9 @@ while True:
         for i in range(0, len(genome_str), 50):
             print(f"{i:3d}: {genome_str[i:i+50]}")
         print("=" * 60)
+
+    elif cmd == "visual":
+        visual_genome()
 
     elif cmd == "stats":
         mutations = len([s for s in seen if s >= 3])
@@ -135,5 +150,4 @@ while True:
             print(f"[{p:3d}] {dna[p]} (seen {seen[p]} times)")
 
     else:
-        print("Commands: view, entire, stats, prophecies, quit")
-        
+        print("Commands: view, entire, visual, stats, prophecies, quit")
