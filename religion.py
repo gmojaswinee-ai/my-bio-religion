@@ -6,7 +6,6 @@ print("=" * 60)
 print("Stillness. Contamination. Emergence.")
 print("=" * 60)
 
-# DNA SEQUENCE INPUT
 choice = input("\nDo you want to enter your own DNA sequence? (yes/no): ").lower()
 
 if choice == "yes":
@@ -137,3 +136,4 @@ while True:
 
     else:
         print("Commands: view, entire, stats, prophecies, quit")
+        
