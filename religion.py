@@ -45,5 +45,3 @@ while True:
                 print("[", p, "]", dna[p], "(seen", seen[p], "times)")
         else:
             print("Use: view 20 40")
-    else:
-        print("Commands: view 20 40, entire, stats, quit")
